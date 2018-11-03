@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <NoPackageAnalysis>true</NoPackageAnalysis>
+        <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>
+        <Version>0.9.0</Version>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="build\*.*">
+            <Pack>true</Pack>
+            <PackagePath>build\</PackagePath>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Build.Framework" Version="15.1.1012" />
+        <PackageReference Include="Microsoft.Build.Utilities.Core" Version="15.1.1012" />
+        <PackageReference Update="@(PackageReference)" PrivateAssets="All" />
+    </ItemGroup>
+
+</Project>

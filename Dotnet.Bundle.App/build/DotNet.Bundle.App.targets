@@ -1,0 +1,53 @@
+<Project TreatAsLocalProperty="TaskFolder;TaskAssembly">
+
+  <PropertyGroup>
+    <TaskFolder>netstandard2.0</TaskFolder>
+    <TaskAssembly>$(MSBuildThisFileDirectory)..\tasks\$(TaskFolder)\DotNet.Bundle.App.dll</TaskAssembly>
+  </PropertyGroup>
+
+  <UsingTask TaskName="DotNet.Bundle.App.BundleAppTask" AssemblyFile="$(TaskAssembly)" />
+  
+  <Target Name="BundleApp" DependsOnTargets="Publish">
+    
+    <PropertyGroup>
+
+      <BundleName Condition="'$(BundleName)' == '' AND '$(TargetName)' != ''">$(TargetName)</BundleName>
+      <BundleName Condition="'$(BundleName)' == '' AND '$(TargetName)' == ''">Application</BundleName>
+
+      <BundleDisplayName Condition="'$(BundleDisplayName)' == '' AND '$(TargetName)' != ''">$(TargetName)</BundleDisplayName>
+      <BundleDisplayName Condition="'$(BundleDisplayName)' == '' AND '$(TargetName)' == ''">Application</BundleDisplayName>
+
+      <BundleIdentifier Condition="'$(BundleIdentifier)' == '' AND '$(TargetName)' != ''">$(TargetName)</BundleIdentifier>
+      <BundleIdentifier Condition="'$(BundleIdentifier)' == '' AND '$(TargetName)' == ''">com.example</BundleIdentifier>
+
+      <BundleVersion Condition="'$(BundleVersion)' == '' AND '$(Version)' != ''">$(Version)</BundleVersion>
+      <BundleVersion Condition="'$(BundleVersion)' == '' AND '$(Version)' == ''">1.0.0</BundleVersion>
+
+      <!--<BundlePackageType Condition="'$(BundlePackageType)' == ''">$(Version)</BundlePackageType>-->
+      <BundlePackageType Condition="'$(BundlePackageType)' == ''">AAPL</BundlePackageType>
+
+      <!--<BundleSignature Condition="'$(BundleSignature)' == '' AND '$(Version)' != ''">$(Version)</BundleSignature>-->
+      <BundleSignature Condition="'$(BundleSignature)' == ''">????</BundleSignature>
+
+      <BundleExecutable Condition="'$(BundleExecutable)' == '' AND '$(TargetName)' != ''">$(TargetName)</BundleExecutable>
+      <BundleExecutable Condition="'$(BundleExecutable)' == '' AND '$(TargetName)' == ''">none</BundleExecutable>
+      
+      <BundleIconFile Condition="'$(BundleIconFile)' == '' AND '$(TargetName)' != ''">$(TargetName).icns</BundleIconFile>
+      <BundleIconFile Condition="'$(BundleIconFile)' == '' AND '$(TargetName)' == ''">none.icns</BundleIconFile>
+      
+    </PropertyGroup>
+    
+    <BundleAppTask
+      PublishDir="$(PublishDir)"
+      BundleName="$(BundleName)"
+      BundleDisplayName="$(BundleDisplayName)"
+      BundleIdentifier="$(BundleIdentifier)"
+      BundleVersion="$(BundleVersion)"
+      BundlePackageType="$(BundlePackageType)"
+      BundleSignature="$(BundleSignature)"
+      BundleExecutable="$(BundleExecutable)"
+      BundleIconFile="$(BundleIconFile)" />
+    
+  </Target>
+  
+</Project>
