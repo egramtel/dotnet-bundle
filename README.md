@@ -1,6 +1,6 @@
 # dotnet-bundle
 
-The command-line interface (CLI) tools for bundling .NET Core projects into MacOS applications (.app)
+Command-line interface tools for bundling .NET Core projects into MacOS applications (.app)
 
 ### Installation
 
@@ -9,7 +9,7 @@ Install MSBuild target via NuGet package: ```Dotnet.Bundle```
 [![NuGet](https://img.shields.io/nuget/v/Dotnet.Bundle.svg)](https://www.nuget.org/packages/Dotnet.Bundle/)
 
 ```
-<PackageReference Include="Dotnet.Bundle" Version="0.9.5" />
+<PackageReference Include="Dotnet.Bundle" Version="0.9.6" />
 ```
 
 Install .NET Core CLI tool via NuGet package: ```dotnet-bundle```
@@ -17,13 +17,13 @@ Install .NET Core CLI tool via NuGet package: ```dotnet-bundle```
 [![NuGet](https://img.shields.io/nuget/v/dotnet-bundle.svg)](https://www.nuget.org/packages/dotnet-bundle/)
 
 ```
-<DotNetCliToolReference Include="dotnet-bundle" Version="0.9.5" />
+<DotNetCliToolReference Include="dotnet-bundle" Version="0.9.6" />
 ```
 
 ### Using the tool
 
 ```
-dotnet bundle [-c|--configuration] [-f|--framework] [-r|--runtime]
+dotnet bundle [-c|--configuration] [-f|--framework] [-r|--runtime] [-o|--output]
 ```
 
 ### Properties

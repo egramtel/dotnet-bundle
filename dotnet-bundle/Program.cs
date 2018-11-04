@@ -26,9 +26,17 @@ namespace Dotnet.Bundle
                 "Defines the build configuration. The default value is Debug.",
                 CommandOptionType.SingleValue);
 
+            var output = application.Option(
+                "-o | --output <output>",
+                "Specifies the path for the output directory.",
+                CommandOptionType.SingleValue);
+
+            application.HelpOption("-h | --help");
+            
             application.OnExecute(() =>
             {
                 var command = new StringBuilder();
+                
                 command.Append($"msbuild /t:BundleApp ");
 
                 if (runtime.HasValue())
@@ -44,6 +52,13 @@ namespace Dotnet.Bundle
                 if (configuration.HasValue())
                 {
                     command.Append($"/p:Configuration={configuration.Value()} ");
+                }
+
+                if (output.HasValue())
+                {
+                    command.Append($"/p:OutputPath={output.Value()} ");
+                    command.Append($"/p:AppendTargetFrameworkToOutputPath=false ");
+                    command.Append($"/p:AppendRuntimeIdentifierToOutputPath=false ");
                 }
 
                 var process = new Process
