@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-bundle", "dotnet-bundle\dotnet-bundle.csproj", "{522D4E55-751B-41D9-94A0-1311A990A709}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Bundle.App", "Dotnet.Bundle.App\Dotnet.Bundle.App.csproj", "{CB54F0FD-7C7E-4347-BE12-5880C6C86ABF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Bundle", "Dotnet.Bundle\Dotnet.Bundle.csproj", "{CB54F0FD-7C7E-4347-BE12-5880C6C86ABF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

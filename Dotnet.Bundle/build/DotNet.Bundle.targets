@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TaskFolder>netstandard2.0</TaskFolder>
-    <TaskAssembly>$(MSBuildThisFileDirectory)..\tasks\$(TaskFolder)\DotNet.Bundle.App.dll</TaskAssembly>
+    <TaskAssembly>$(MSBuildThisFileDirectory)..\tasks\$(TaskFolder)\DotNet.Bundle.dll</TaskAssembly>
   </PropertyGroup>
 
-  <UsingTask TaskName="DotNet.Bundle.App.BundleAppTask" AssemblyFile="$(TaskAssembly)" />
+  <UsingTask TaskName="DotNet.Bundle.BundleAppTask" AssemblyFile="$(TaskAssembly)" />
   
   <Target Name="BundleApp" DependsOnTargets="Publish">
     
@@ -23,10 +23,8 @@
       <BundleVersion Condition="'$(BundleVersion)' == '' AND '$(Version)' != ''">$(Version)</BundleVersion>
       <BundleVersion Condition="'$(BundleVersion)' == '' AND '$(Version)' == ''">1.0.0</BundleVersion>
 
-      <!--<BundlePackageType Condition="'$(BundlePackageType)' == ''">$(Version)</BundlePackageType>-->
       <BundlePackageType Condition="'$(BundlePackageType)' == ''">AAPL</BundlePackageType>
 
-      <!--<BundleSignature Condition="'$(BundleSignature)' == '' AND '$(Version)' != ''">$(Version)</BundleSignature>-->
       <BundleSignature Condition="'$(BundleSignature)' == ''">????</BundleSignature>
 
       <BundleExecutable Condition="'$(BundleExecutable)' == '' AND '$(TargetName)' != ''">$(TargetName)</BundleExecutable>
@@ -34,6 +32,8 @@
       
       <BundleIconFile Condition="'$(BundleIconFile)' == '' AND '$(TargetName)' != ''">$(TargetName).icns</BundleIconFile>
       <BundleIconFile Condition="'$(BundleIconFile)' == '' AND '$(TargetName)' == ''">none.icns</BundleIconFile>
+
+      <BundlePrincipalClass Condition="'$(BundlePrincipalClass)' == ''">NSApplication</BundlePrincipalClass>
       
     </PropertyGroup>
     

@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Xml;
 
-namespace Dotnet.Bundle.App
+namespace Dotnet.Bundle
 {
     public class PlistWriter
     {
@@ -38,14 +38,15 @@ namespace Dotnet.Bundle.App
                 xmlWriter.WriteAttributeString("version", "1.0");
                 xmlWriter.WriteStartElement("dict");
                 
-                WriteProperty(xmlWriter, nameof(_task.BundleName), _task.BundleName);
-                WriteProperty(xmlWriter, nameof(_task.BundleDisplayName), _task.BundleDisplayName);
-                WriteProperty(xmlWriter, nameof(_task.BundleIdentifier), _task.BundleIdentifier);
-                WriteProperty(xmlWriter, nameof(_task.BundleVersion), _task.BundleVersion);
-                WriteProperty(xmlWriter, nameof(_task.BundlePackageType), _task.BundlePackageType);
-                WriteProperty(xmlWriter, nameof(_task.BundleSignature), _task.BundleSignature);
-                WriteProperty(xmlWriter, nameof(_task.BundleExecutable), _task.BundleExecutable);
-                WriteProperty(xmlWriter, nameof(_task.BundleIconFile), Path.GetFileName(_task.BundleIconFile));
+                WriteProperty(xmlWriter, "CF" + nameof(_task.BundleName), _task.BundleName);
+                WriteProperty(xmlWriter, "CF" + nameof(_task.BundleDisplayName), _task.BundleDisplayName);
+                WriteProperty(xmlWriter, "CF" + nameof(_task.BundleIdentifier), _task.BundleIdentifier);
+                WriteProperty(xmlWriter, "CF" + nameof(_task.BundleVersion), _task.BundleVersion);
+                WriteProperty(xmlWriter, "CF" + nameof(_task.BundlePackageType), _task.BundlePackageType);
+                WriteProperty(xmlWriter, "CF" + nameof(_task.BundleSignature), _task.BundleSignature);
+                WriteProperty(xmlWriter, "CF" + nameof(_task.BundleExecutable), _task.BundleExecutable);
+                WriteProperty(xmlWriter, "CF" + nameof(_task.BundleIconFile), Path.GetFileName(_task.BundleIconFile));
+                WriteProperty(xmlWriter, "NS" + nameof(_task.BundlePrincipalClass), _task.BundlePrincipalClass);
                 
                 xmlWriter.WriteEndElement();
                 xmlWriter.WriteEndElement();
@@ -57,7 +58,7 @@ namespace Dotnet.Bundle.App
             if (!string.IsNullOrWhiteSpace(value))
             {
                 xmlWriter.WriteStartElement("key");
-                xmlWriter.WriteString("CF" + name);
+                xmlWriter.WriteString(name);
                 xmlWriter.WriteEndElement();
                 
                 xmlWriter.WriteStartElement("string");

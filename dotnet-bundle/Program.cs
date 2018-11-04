@@ -26,40 +26,20 @@ namespace Dotnet.Bundle
                 "Defines the build configuration. The default value is Debug.",
                 CommandOptionType.SingleValue);
 
-            var kind = application.Option(
-                "-k | --kind <kind>",
-                "Defines bundle kind. Possible values are App or Dmg",
-                CommandOptionType.SingleValue);
-
             application.OnExecute(() =>
             {
-                if (!framework.HasValue())
-                {
-                    Console.WriteLine("Target framework is not specified.");
-                    return -1;
-                }
-
-                if (!runtime.HasValue())
-                {
-                    Console.WriteLine("Target runtime is not specified.");
-                    return -1;
-                }
-
-                if (!kind.HasValue())
-                {
-                    Console.WriteLine("Bundle kind is not specified.");
-                    return -1;
-                }
-                else if (kind.Value() != "App" || kind.Value() != "Dmg")
-                {
-                    Console.WriteLine("Invalid bundle kind is specified.");
-                    return -1;
-                }
-
                 var command = new StringBuilder();
-                command.Append($"msbuild /t:Bundle{kind.Value()} ");
-                command.Append($"/p:RuntimeIdentifier={runtime.Value()} ");
-                command.Append($"/p:TargetFramework={framework.Value()} ");
+                command.Append($"msbuild /t:BundleApp ");
+
+                if (runtime.HasValue())
+                {
+                    command.Append($"/p:RuntimeIdentifier={runtime.Value()} ");
+                }
+
+                if (framework.HasValue())
+                {
+                    command.Append($"/p:TargetFramework={framework.Value()} ");
+                }
 
                 if (configuration.HasValue())
                 {

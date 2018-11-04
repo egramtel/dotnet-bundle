@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace Dotnet.Bundle.App
+namespace Dotnet.Bundle
 {
     public class StructureBuilder
     {

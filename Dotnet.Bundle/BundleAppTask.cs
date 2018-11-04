@@ -2,7 +2,7 @@
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Dotnet.Bundle.App
+namespace Dotnet.Bundle
 {
     public class BundleAppTask : Task
     {
@@ -32,6 +32,9 @@ namespace Dotnet.Bundle.App
 
         [Required]
         public string BundleIconFile { get; set; }
+        
+        [Required]
+        public string BundlePrincipalClass { get; set; }
         
         public override bool Execute()
         {
