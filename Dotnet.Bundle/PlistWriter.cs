@@ -38,15 +38,16 @@ namespace Dotnet.Bundle
                 xmlWriter.WriteAttributeString("version", "1.0");
                 xmlWriter.WriteStartElement("dict");
                 
-                WriteProperty(xmlWriter, "CF" + nameof(_task.BundleName), _task.BundleName);
-                WriteProperty(xmlWriter, "CF" + nameof(_task.BundleDisplayName), _task.BundleDisplayName);
-                WriteProperty(xmlWriter, "CF" + nameof(_task.BundleIdentifier), _task.BundleIdentifier);
-                WriteProperty(xmlWriter, "CF" + nameof(_task.BundleVersion), _task.BundleVersion);
-                WriteProperty(xmlWriter, "CF" + nameof(_task.BundlePackageType), _task.BundlePackageType);
-                WriteProperty(xmlWriter, "CF" + nameof(_task.BundleSignature), _task.BundleSignature);
-                WriteProperty(xmlWriter, "CF" + nameof(_task.BundleExecutable), _task.BundleExecutable);
-                WriteProperty(xmlWriter, "CF" + nameof(_task.BundleIconFile), Path.GetFileName(_task.BundleIconFile));
-                WriteProperty(xmlWriter, "NS" + nameof(_task.BundlePrincipalClass), _task.BundlePrincipalClass);
+                WriteProperty(xmlWriter, nameof(_task.CFBundleName), _task.CFBundleName);
+                WriteProperty(xmlWriter, nameof(_task.CFDisplayName), _task.CFDisplayName);
+                WriteProperty(xmlWriter, nameof(_task.CFBundleIdentifier), _task.CFBundleIdentifier);
+                WriteProperty(xmlWriter, nameof(_task.CFBundleVersion), _task.CFBundleVersion);
+                WriteProperty(xmlWriter, nameof(_task.CFBundlePackageType), _task.CFBundlePackageType);
+                WriteProperty(xmlWriter, nameof(_task.CFBundleSignature), _task.CFBundleSignature);
+                WriteProperty(xmlWriter, nameof(_task.CFBundleExecutable), _task.CFBundleExecutable);
+                WriteProperty(xmlWriter, nameof(_task.CFBundleIconFile), Path.GetFileName(_task.CFBundleIconFile));
+                WriteProperty(xmlWriter, nameof(_task.NSPrincipalClass), _task.NSPrincipalClass);
+                WriteProperty(xmlWriter, nameof(_task.NSHighResolutionCapable), _task.NSHighResolutionCapable);
                 
                 xmlWriter.WriteEndElement();
                 xmlWriter.WriteEndElement();
@@ -65,6 +66,24 @@ namespace Dotnet.Bundle
                 xmlWriter.WriteString(value);
                 xmlWriter.WriteEndElement();
             }
+        }
+        
+        private void WriteProperty(XmlWriter xmlWriter, string name, bool value)
+        {
+            xmlWriter.WriteStartElement("key");
+            xmlWriter.WriteString(name);
+            xmlWriter.WriteEndElement();
+
+            if (value)
+            {
+                xmlWriter.WriteStartElement("true");
+            }
+            else
+            {
+                xmlWriter.WriteStartElement("false");
+            }
+            
+            xmlWriter.WriteEndElement();
         }
     }
 }

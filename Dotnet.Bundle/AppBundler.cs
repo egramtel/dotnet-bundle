@@ -46,11 +46,11 @@ namespace Dotnet.Bundle
 
         private void CopyIconFile(DirectoryInfo outputDirectory, DirectoryInfo resourcesDirectory)
         {
-            var sourceFile = new FileInfo(Path.Combine(outputDirectory.FullName, _task.BundleIconFile));
+            var sourceFile = new FileInfo(Path.Combine(outputDirectory.FullName, _task.CFBundleIconFile));
             if (sourceFile.Exists)
             {
                 sourceFile.CopyTo(
-                    Path.Combine(resourcesDirectory.FullName, Path.GetFileName(_task.BundleIconFile)));
+                    Path.Combine(resourcesDirectory.FullName, Path.GetFileName(_task.CFBundleIconFile)));
             }
         }
     }

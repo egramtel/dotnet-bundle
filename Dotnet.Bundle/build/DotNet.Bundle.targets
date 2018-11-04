@@ -11,42 +11,47 @@
     
     <PropertyGroup>
 
-      <BundleName Condition="'$(BundleName)' == '' AND '$(TargetName)' != ''">$(TargetName)</BundleName>
-      <BundleName Condition="'$(BundleName)' == '' AND '$(TargetName)' == ''">Application</BundleName>
+      <CFBundleName Condition="'$(CFBundleName)' == '' AND '$(TargetName)' != ''">$(TargetName)</CFBundleName>
+      <CFBundleName Condition="'$(CFBundleName)' == '' AND '$(TargetName)' == ''">Application</CFBundleName>
 
-      <BundleDisplayName Condition="'$(BundleDisplayName)' == '' AND '$(TargetName)' != ''">$(TargetName)</BundleDisplayName>
-      <BundleDisplayName Condition="'$(BundleDisplayName)' == '' AND '$(TargetName)' == ''">Application</BundleDisplayName>
+      <CFBundleDisplayName Condition="'$(CFBundleDisplayName)' == '' AND '$(TargetName)' != ''">$(TargetName)</CFBundleDisplayName>
+      <CFBundleDisplayName Condition="'$(CFBundleDisplayName)' == '' AND '$(TargetName)' == ''">Application</CFBundleDisplayName>
 
-      <BundleIdentifier Condition="'$(BundleIdentifier)' == '' AND '$(TargetName)' != ''">$(TargetName)</BundleIdentifier>
-      <BundleIdentifier Condition="'$(BundleIdentifier)' == '' AND '$(TargetName)' == ''">com.example</BundleIdentifier>
+      <CFBundleIdentifier Condition="'$(CFBundleIdentifier)' == '' AND '$(TargetName)' != ''">$(TargetName)</CFBundleIdentifier>
+      <CFBundleIdentifier Condition="'$(CFBundleIdentifier)' == '' AND '$(TargetName)' == ''">com.example</CFBundleIdentifier>
 
-      <BundleVersion Condition="'$(BundleVersion)' == '' AND '$(Version)' != ''">$(Version)</BundleVersion>
-      <BundleVersion Condition="'$(BundleVersion)' == '' AND '$(Version)' == ''">1.0.0</BundleVersion>
+      <CFBundleVersion Condition="'$(CFBundleVersion)' == '' AND '$(Version)' != ''">$(Version)</CFBundleVersion>
+      <CFBundleVersion Condition="'$(CFBundleVersion)' == '' AND '$(Version)' == ''">1.0.0</CFBundleVersion>
 
-      <BundlePackageType Condition="'$(BundlePackageType)' == ''">AAPL</BundlePackageType>
+      <CFBundlePackageType Condition="'$(CFBundlePackageType)' == ''">AAPL</CFBundlePackageType>
 
-      <BundleSignature Condition="'$(BundleSignature)' == ''">????</BundleSignature>
+      <CFBundleSignature Condition="'$(CFBundleSignature)' == ''">????</CFBundleSignature>
 
-      <BundleExecutable Condition="'$(BundleExecutable)' == '' AND '$(TargetName)' != ''">$(TargetName)</BundleExecutable>
-      <BundleExecutable Condition="'$(BundleExecutable)' == '' AND '$(TargetName)' == ''">none</BundleExecutable>
+      <CFBundleExecutable Condition="'$(CFBundleExecutable)' == '' AND '$(TargetName)' != ''">$(TargetName)</CFBundleExecutable>
+      <CFBundleExecutable Condition="'$(CFBundleExecutable)' == '' AND '$(TargetName)' == ''">none</CFBundleExecutable>
       
-      <BundleIconFile Condition="'$(BundleIconFile)' == '' AND '$(TargetName)' != ''">$(TargetName).icns</BundleIconFile>
-      <BundleIconFile Condition="'$(BundleIconFile)' == '' AND '$(TargetName)' == ''">none.icns</BundleIconFile>
+      <CFBundleIconFile Condition="'$(CFBundleIconFile)' == '' AND '$(TargetName)' != ''">$(TargetName).icns</CFBundleIconFile>
+      <CFBundleIconFile Condition="'$(CFBundleIconFile)' == '' AND '$(TargetName)' == ''">none.icns</CFBundleIconFile>
 
-      <BundlePrincipalClass Condition="'$(BundlePrincipalClass)' == ''">NSApplication</BundlePrincipalClass>
+      <NSPrincipalClass Condition="'$(NSPrincipalClass)' == ''">NSApplication</NSPrincipalClass>
+      
+      <NSHighResolutionCapable Condition="'$(NSHighResolutionCapable)' == ''" >true</NSHighResolutionCapable>
       
     </PropertyGroup>
     
     <BundleAppTask
       PublishDir="$(PublishDir)"
-      BundleName="$(BundleName)"
-      BundleDisplayName="$(BundleDisplayName)"
-      BundleIdentifier="$(BundleIdentifier)"
-      BundleVersion="$(BundleVersion)"
-      BundlePackageType="$(BundlePackageType)"
-      BundleSignature="$(BundleSignature)"
-      BundleExecutable="$(BundleExecutable)"
-      BundleIconFile="$(BundleIconFile)" />
+      CFBundleName="$(CFBundleName)"
+      CFBundleDisplayName="$(CFBundleDisplayName)"
+      CFBundleIdentifier="$(CFBundleIdentifier)"
+      CFBundleVersion="$(CFundleVersion)"
+      CFBundlePackageType="$(CFBundlePackageType)"
+      CFBundleSignature="$(CFBundleSignature)"
+      CFBundleExecutable="$(CFBundleExecutable)"
+      CFBundleIconFile="$(CFBundleIconFile)"
+      NSPrincipalClass="$(NSPrincipalClass)"
+      NSHighResolutionCapable="$(NSHighResolutionCapable)"
+      />
     
   </Target>
   

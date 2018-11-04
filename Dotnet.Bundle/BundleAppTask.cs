@@ -10,31 +10,34 @@ namespace Dotnet.Bundle
         public string PublishDir { get; set; }
         
         [Required]
-        public string BundleName { get; set; }
+        public string CFBundleName { get; set; }
 
         [Required]
-        public string BundleDisplayName { get; set; }
+        public string CFDisplayName { get; set; }
 
         [Required]
-        public string BundleIdentifier { get; set; }
+        public string CFBundleIdentifier { get; set; }
 
         [Required]
-        public string BundleVersion { get; set; }
+        public string CFBundleVersion { get; set; }
 
         [Required]
-        public string BundlePackageType { get; set; }
+        public string CFBundlePackageType { get; set; }
 
         [Required]
-        public string BundleSignature { get; set; }
+        public string CFBundleSignature { get; set; }
 
         [Required]
-        public string BundleExecutable { get; set; }
+        public string CFBundleExecutable { get; set; }
 
         [Required]
-        public string BundleIconFile { get; set; }
+        public string CFBundleIconFile { get; set; }
         
         [Required]
-        public string BundlePrincipalClass { get; set; }
+        public string NSPrincipalClass { get; set; }
+        
+        [Required]
+        public bool NSHighResolutionCapable { get; set; }
         
         public override bool Execute()
         {

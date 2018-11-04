@@ -9,7 +9,7 @@ Install MSBuild target via NuGet package: ```Dotnet.Bundle```
 [![NuGet](https://img.shields.io/nuget/v/Dotnet.Bundle.svg)](https://www.nuget.org/packages/Dotnet.Bundle/)
 
 ```
-<PackageReference Include="Dotnet.Bundle" Version="0.9.4" />
+<PackageReference Include="Dotnet.Bundle" Version="0.9.5" />
 ```
 
 Install .NET Core CLI tool via NuGet package: ```dotnet-bundle```
@@ -17,7 +17,7 @@ Install .NET Core CLI tool via NuGet package: ```dotnet-bundle```
 [![NuGet](https://img.shields.io/nuget/v/dotnet-bundle.svg)](https://www.nuget.org/packages/dotnet-bundle/)
 
 ```
-<DotNetCliToolReference Include="dotnet-bundle" Version="0.9.4" />
+<DotNetCliToolReference Include="dotnet-bundle" Version="0.9.5" />
 ```
 
 ### Using the tool
@@ -32,15 +32,16 @@ Define properties to override default bundle values
 
 ```
 <PropertyGroup>
-    <BundleName></BundleName>
-    <BundleDisplayName></BundleDisplayName>
-    <BundleIdentifier></BundleIdentifier>
-    <BundleVersion></BundleVersion>
-    <BundlePackageType></BundlePackageType>
-    <BundleSignature></BundleSignature>
-    <BundleExecutable></BundleExecutable>
-    <BundleIconFile></BundleIconFile>
-    <BundlePrincipalClass></BundlePrincipalClass>
+    <CFBundleName></CFBundleName>
+    <CFBundleDisplayName></CFBundleDisplayName>
+    <CFBundleIdentifier></CFBundleIdentifier>
+    <CFBundleVersion></CFBundleVersion>
+    <CFBundlePackageType></CFBundlePackageType>
+    <CFBundleSignature></CFBundleSignature>
+    <CFBundleExecutable></CFBundleExecutable>
+    <CFBundleIconFile></CFBundleIconFile>
+    <NSPrincipalClass></NSPrincipalClass>
+    <NSHighResolutionCapable></NSHighResolutionCapable>
 </PropertyGroup>
 ```
 
