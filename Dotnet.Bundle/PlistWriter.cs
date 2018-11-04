@@ -39,7 +39,7 @@ namespace Dotnet.Bundle
                 xmlWriter.WriteStartElement("dict");
                 
                 WriteProperty(xmlWriter, nameof(_task.CFBundleName), _task.CFBundleName);
-                WriteProperty(xmlWriter, nameof(_task.CFDisplayName), _task.CFDisplayName);
+                WriteProperty(xmlWriter, nameof(_task.CFBundleDisplayName), _task.CFBundleDisplayName);
                 WriteProperty(xmlWriter, nameof(_task.CFBundleIdentifier), _task.CFBundleIdentifier);
                 WriteProperty(xmlWriter, nameof(_task.CFBundleVersion), _task.CFBundleVersion);
                 WriteProperty(xmlWriter, nameof(_task.CFBundlePackageType), _task.CFBundlePackageType);

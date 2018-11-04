@@ -9,7 +9,7 @@ Install MSBuild target via NuGet package: ```Dotnet.Bundle```
 [![NuGet](https://img.shields.io/nuget/v/Dotnet.Bundle.svg)](https://www.nuget.org/packages/Dotnet.Bundle/)
 
 ```
-<PackageReference Include="Dotnet.Bundle" Version="0.9.6" />
+<PackageReference Include="Dotnet.Bundle" Version="0.9.7" />
 ```
 
 Install .NET Core CLI tool via NuGet package: ```dotnet-bundle```
@@ -17,7 +17,7 @@ Install .NET Core CLI tool via NuGet package: ```dotnet-bundle```
 [![NuGet](https://img.shields.io/nuget/v/dotnet-bundle.svg)](https://www.nuget.org/packages/dotnet-bundle/)
 
 ```
-<DotNetCliToolReference Include="dotnet-bundle" Version="0.9.6" />
+<DotNetCliToolReference Include="dotnet-bundle" Version="0.9.7" />
 ```
 
 ### Using the tool

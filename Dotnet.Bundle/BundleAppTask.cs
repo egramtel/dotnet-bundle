@@ -13,7 +13,7 @@ namespace Dotnet.Bundle
         public string CFBundleName { get; set; }
 
         [Required]
-        public string CFDisplayName { get; set; }
+        public string CFBundleDisplayName { get; set; }
 
         [Required]
         public string CFBundleIdentifier { get; set; }
