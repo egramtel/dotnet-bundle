@@ -32,16 +32,16 @@ Define properties to override default bundle values
 
 ```
 <PropertyGroup>
-    <CFBundleName></CFBundleName>
-    <CFBundleDisplayName></CFBundleDisplayName>
-    <CFBundleIdentifier></CFBundleIdentifier>
-    <CFBundleVersion></CFBundleVersion>
-    <CFBundlePackageType></CFBundlePackageType>
-    <CFBundleSignature></CFBundleSignature>
-    <CFBundleExecutable></CFBundleExecutable>
-    <CFBundleIconFile></CFBundleIconFile>
-    <NSPrincipalClass></NSPrincipalClass>
-    <NSHighResolutionCapable></NSHighResolutionCapable>
+    <CFBundleName>AppName</CFBundleName>
+    <CFBundleDisplayName>App Name</CFBundleDisplayName>
+    <CFBundleIdentifier>com.example</CFBundleIdentifier>
+    <CFBundleVersion>1.0.0</CFBundleVersion>
+    <CFBundlePackageType>AAPL</CFBundlePackageType>
+    <CFBundleSignature>????</CFBundleSignature>
+    <CFBundleExecutable>AppName</CFBundleExecutable>
+    <CFBundleIconFile>AppName.icns</CFBundleIconFile>
+    <NSPrincipalClass>NSApplication</NSPrincipalClass>
+    <NSHighResolutionCapable>true</NSHighResolutionCapable>
 </PropertyGroup>
 ```
 
