@@ -44,7 +44,7 @@
       CFBundleName="$(CFBundleName)"
       CFBundleDisplayName="$(CFBundleDisplayName)"
       CFBundleIdentifier="$(CFBundleIdentifier)"
-      CFBundleVersion="$(CFundleVersion)"
+      CFBundleVersion="$(CFBundleVersion)"
       CFBundlePackageType="$(CFBundlePackageType)"
       CFBundleSignature="$(CFBundleSignature)"
       CFBundleExecutable="$(CFBundleExecutable)"
