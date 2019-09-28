@@ -4,7 +4,7 @@ Command-line interface tools for bundling .NET Core projects into MacOS applicat
 
 ### Installation
 
-Install MSBuild target via NuGet package: ```Dotnet.Bundle```
+Install MSBuild task via NuGet package: ```Dotnet.Bundle```
 
 [![NuGet](https://img.shields.io/nuget/v/Dotnet.Bundle.svg)](https://www.nuget.org/packages/Dotnet.Bundle/)
 
@@ -12,18 +12,10 @@ Install MSBuild target via NuGet package: ```Dotnet.Bundle```
 <PackageReference Include="Dotnet.Bundle" Version="*" />
 ```
 
-Install .NET Core CLI tool via NuGet package: ```dotnet-bundle```
-
-[![NuGet](https://img.shields.io/nuget/v/dotnet-bundle.svg)](https://www.nuget.org/packages/dotnet-bundle/)
-
-```
-<DotNetCliToolReference Include="dotnet-bundle" Version="*" />
-```
-
 ### Using the tool
 
 ```
-dotnet bundle [-c|--configuration] [-f|--framework] [-r|--runtime] [-o|--output]
+dotnet msbuild -t:BundleApp -p:RuntimeIdentifier=osx-x64 [-p: ...]
 ```
 
 ### Properties
@@ -32,14 +24,14 @@ Define properties to override default bundle values
 
 ```
 <PropertyGroup>
-    <CFBundleName>AppName</CFBundleName>
+    <CFBundleName>AppName</CFBundleName> <!-- Also defines .app file name -->
     <CFBundleDisplayName>App Name</CFBundleDisplayName>
     <CFBundleIdentifier>com.example</CFBundleIdentifier>
     <CFBundleVersion>1.0.0</CFBundleVersion>
     <CFBundlePackageType>AAPL</CFBundlePackageType>
     <CFBundleSignature>????</CFBundleSignature>
     <CFBundleExecutable>AppName</CFBundleExecutable>
-    <CFBundleIconFile>AppName.icns</CFBundleIconFile>
+    <CFBundleIconFile>AppName.icns</CFBundleIconFile> <!-- Will be copied from output directory -->
     <NSPrincipalClass>NSApplication</NSPrincipalClass>
     <NSHighResolutionCapable>true</NSHighResolutionCapable>
 </PropertyGroup>
