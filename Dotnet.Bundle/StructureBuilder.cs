@@ -11,9 +11,11 @@ namespace Dotnet.Bundle
             _task = task;
         }
 
-        public string OutputDirectory => _task.PublishDir;
+        public string OutputDirectory => _task.OutDir;
+        
+        public string PublishDirectory => _task.PublishDir;
 
-        public string AppDirectory => Path.Combine(Path.Combine(OutputDirectory, _task.CFBundleDisplayName + ".app"));
+        public string AppDirectory => Path.Combine(Path.Combine(PublishDirectory, _task.CFBundleDisplayName + ".app"));
         
         public string ContentsDirectory => Path.Combine(AppDirectory, "Contents");
         
@@ -23,7 +25,7 @@ namespace Dotnet.Bundle
 
         public void Build()
         {
-            _task.Log.LogMessage($"Publish directory is: {OutputDirectory}");
+            _task.Log.LogMessage($"Publish directory is: {PublishDirectory}");
             
             if (Directory.Exists(AppDirectory))
             {

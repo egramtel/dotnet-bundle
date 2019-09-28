@@ -20,7 +20,7 @@ namespace Dotnet.Bundle
                 new DirectoryInfo(_builder.ResourcesDirectory));
             
             CopyFiles(
-                new DirectoryInfo(_builder.OutputDirectory),
+                new DirectoryInfo(_builder.PublishDirectory),
                 new DirectoryInfo(_builder.MacosDirectory),
                 new DirectoryInfo(_builder.AppDirectory));
         }
@@ -49,21 +49,20 @@ namespace Dotnet.Bundle
             }
         }
 
-        private void CopyIcon(DirectoryInfo source, DirectoryInfo target)
+        private void CopyIcon(DirectoryInfo source, DirectoryInfo destination)
         {
-            var iconName = Path.GetFileName(_task.CFBundleIconFile);
-            _task.Log.LogMessage($"Icon name for bundle is: {iconName}");
-            
-            if (iconName == null)
+            var iconName = _task.CFBundleIconFile;
+            if (string.IsNullOrWhiteSpace(iconName))
             {
+                _task.Log.LogMessage($"No icon is specified for bundle");
                 return;
             }
             
             var sourcePath = Path.Combine(source.FullName, iconName);
-            _task.Log.LogMessage($"Icon file for bundle is: {sourcePath}");
+            _task.Log.LogMessage($"Icon file source for bundle is: {sourcePath}");
             
-            var targetPath = Path.Combine(target.FullName, iconName);
-            _task.Log.LogMessage($"Icon file destination is: {targetPath}");
+            var targetPath = Path.Combine(destination.FullName, Path.GetFileName(iconName));
+            _task.Log.LogMessage($"Icon file destination for bundle is: {targetPath}");
             
             var sourceFile = new FileInfo(sourcePath);
             

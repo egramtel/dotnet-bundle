@@ -7,6 +7,9 @@ namespace Dotnet.Bundle
     public class BundleAppTask : Task
     {
         [Required]
+        public string OutDir { get; set; }
+        
+        [Required]
         public string PublishDir { get; set; }
         
         [Required]
