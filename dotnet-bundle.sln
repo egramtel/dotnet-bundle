@@ -1,7 +1,5 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-bundle", "dotnet-bundle\dotnet-bundle.csproj", "{522D4E55-751B-41D9-94A0-1311A990A709}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Bundle", "Dotnet.Bundle\Dotnet.Bundle.csproj", "{CB54F0FD-7C7E-4347-BE12-5880C6C86ABF}"
 EndProject
 Global
@@ -10,10 +8,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{522D4E55-751B-41D9-94A0-1311A990A709}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{522D4E55-751B-41D9-94A0-1311A990A709}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{522D4E55-751B-41D9-94A0-1311A990A709}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{522D4E55-751B-41D9-94A0-1311A990A709}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CB54F0FD-7C7E-4347-BE12-5880C6C86ABF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CB54F0FD-7C7E-4347-BE12-5880C6C86ABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB54F0FD-7C7E-4347-BE12-5880C6C86ABF}.Release|Any CPU.ActiveCfg = Release|Any CPU

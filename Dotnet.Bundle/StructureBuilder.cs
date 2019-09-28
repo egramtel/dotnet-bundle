@@ -11,7 +11,7 @@ namespace Dotnet.Bundle
             _task = task;
         }
 
-        public string OutputDirectory => Path.Combine(_task.PublishDir);
+        public string OutputDirectory => _task.PublishDir;
 
         public string AppDirectory => Path.Combine(Path.Combine(OutputDirectory, _task.CFBundleDisplayName + ".app"));
         
@@ -23,14 +23,24 @@ namespace Dotnet.Bundle
 
         public void Build()
         {
+            _task.Log.LogMessage($"Publish directory is: {OutputDirectory}");
+            
             if (Directory.Exists(AppDirectory))
             {
+                _task.Log.LogMessage($"Clearing bundle directory");
                 Directory.Delete(AppDirectory, true);
             }
             
+            _task.Log.LogMessage($"Creating bundle directory: {AppDirectory}");
             Directory.CreateDirectory(AppDirectory);
+            
+            _task.Log.LogMessage($"Creating contents directory: {ContentsDirectory}");
             Directory.CreateDirectory(ContentsDirectory);
+            
+            _task.Log.LogMessage($"Creating MacOS directory: {MacosDirectory}");
             Directory.CreateDirectory(MacosDirectory);
+            
+            _task.Log.LogMessage($"Creating resources directory: {ResourcesDirectory}");
             Directory.CreateDirectory(ResourcesDirectory);
         }
     }

@@ -25,6 +25,7 @@ namespace Dotnet.Bundle
 
             var path = Path.Combine(_builder.ContentsDirectory, "Info.plist");
             
+            _task.Log.LogMessage($"Writing property list file: {path}");
             using (var xmlWriter = XmlWriter.Create(path, settings))
             {   
                 xmlWriter.WriteStartDocument();
