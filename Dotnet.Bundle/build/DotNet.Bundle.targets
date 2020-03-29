@@ -33,6 +33,8 @@
       <CFBundleIconFile Condition="'$(CFBundleIconFile)' == '' AND '$(TargetName)' != ''">$(TargetName).icns</CFBundleIconFile>
       <CFBundleIconFile Condition="'$(CFBundleIconFile)' == '' AND '$(TargetName)' == ''">none.icns</CFBundleIconFile>
 
+      <CFBundleShortVersionString Condition="'$(CFBundleVersion)' == ''">$(CFBundleVersion)</CFBundleShortVersionString>
+
       <NSPrincipalClass Condition="'$(NSPrincipalClass)' == ''">NSApplication</NSPrincipalClass>
       
       <NSHighResolutionCapable Condition="'$(NSHighResolutionCapable)' == ''" >true</NSHighResolutionCapable>
@@ -50,6 +52,7 @@
       CFBundleSignature="$(CFBundleSignature)"
       CFBundleExecutable="$(CFBundleExecutable)"
       CFBundleIconFile="$(CFBundleIconFile)"
+      CFBundleShortVersionString="$(CFBundleShortVersionString)"
       NSPrincipalClass="$(NSPrincipalClass)"
       NSHighResolutionCapable="$(NSHighResolutionCapable)"
       />

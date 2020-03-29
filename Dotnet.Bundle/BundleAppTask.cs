@@ -35,13 +35,16 @@ namespace Dotnet.Bundle
 
         [Required]
         public string CFBundleIconFile { get; set; }
-        
+
+        [Required]
+        public string CFBundleShortVersionString { get; set; } 
+
         [Required]
         public string NSPrincipalClass { get; set; }
         
         [Required]
         public bool NSHighResolutionCapable { get; set; }
-        
+
         public override bool Execute()
         {
             var builder = new StructureBuilder(this);
