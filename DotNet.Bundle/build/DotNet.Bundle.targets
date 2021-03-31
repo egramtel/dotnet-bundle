@@ -23,7 +23,7 @@
       <CFBundleVersion Condition="'$(CFBundleVersion)' == '' AND '$(Version)' != ''">$(Version)</CFBundleVersion>
       <CFBundleVersion Condition="'$(CFBundleVersion)' == '' AND '$(Version)' == ''">1.0.0</CFBundleVersion>
 
-      <CFBundlePackageType Condition="'$(CFBundlePackageType)' == ''">AAPL</CFBundlePackageType>
+      <CFBundlePackageType Condition="'$(CFBundlePackageType)' == ''">APPL</CFBundlePackageType>
 
       <CFBundleSignature Condition="'$(CFBundleSignature)' == ''">????</CFBundleSignature>
 

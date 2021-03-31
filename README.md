@@ -28,7 +28,7 @@ Define properties to override default bundle values
     <CFBundleDisplayName>App Name</CFBundleDisplayName>
     <CFBundleIdentifier>com.example</CFBundleIdentifier>
     <CFBundleVersion>1.0.0</CFBundleVersion>
-    <CFBundlePackageType>AAPL</CFBundlePackageType>
+    <CFBundlePackageType>APPL</CFBundlePackageType>
     <CFBundleSignature>????</CFBundleSignature>
     <CFBundleExecutable>AppName</CFBundleExecutable>
     <CFBundleIconFile>AppName.icns</CFBundleIconFile> <!-- Will be copied from output directory -->
