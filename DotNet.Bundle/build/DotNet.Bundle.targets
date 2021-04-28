@@ -55,6 +55,8 @@
       CFBundleShortVersionString="$(CFBundleShortVersionString)"
       NSPrincipalClass="$(NSPrincipalClass)"
       NSHighResolutionCapable="$(NSHighResolutionCapable)"
+      NSRequiresAquaSystemAppearance="$(NSRequiresAquaSystemAppearance)"
+      CFBundleURLTypes="@(CFBundleURLTypes)"
       />
     
   </Target>
