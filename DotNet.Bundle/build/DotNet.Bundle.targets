@@ -38,6 +38,8 @@
       <NSPrincipalClass Condition="'$(NSPrincipalClass)' == ''">NSApplication</NSPrincipalClass>
       
       <NSHighResolutionCapable Condition="'$(NSHighResolutionCapable)' == ''" >true</NSHighResolutionCapable>
+
+      <NSRequiresAquaSystemAppearance Condition="'$(NSHighResolutionCapable)' == ''" >true</NSRequiresAquaSystemAppearance>
       
     </PropertyGroup>
     
@@ -55,6 +57,7 @@
       CFBundleShortVersionString="$(CFBundleShortVersionString)"
       NSPrincipalClass="$(NSPrincipalClass)"
       NSHighResolutionCapable="$(NSHighResolutionCapable)"
+      NSRequiresAquaSystemAppearance="$(NSRequiresAquaSystemAppearance)"
       />
     
   </Target>
