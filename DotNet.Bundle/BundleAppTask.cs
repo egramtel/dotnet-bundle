@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Build.Framework;
+﻿using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
 namespace Dotnet.Bundle
@@ -44,6 +43,15 @@ namespace Dotnet.Bundle
         
         [Required]
         public bool NSHighResolutionCapable { get; set; }
+
+        public bool NSRequiresAquaSystemAppearance {
+            get => NSRequiresAquaSystemAppearanceNullable.Value;
+            set => NSRequiresAquaSystemAppearanceNullable = value;
+        }
+
+        internal bool? NSRequiresAquaSystemAppearanceNullable { get; private set; }
+
+        public ITaskItem[] CFBundleURLTypes { get; set; }
 
         public override bool Execute()
         {
