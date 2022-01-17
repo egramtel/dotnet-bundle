@@ -83,7 +83,6 @@ jobs:
         dotnet publish -c Release
     - name: Tests
       run: |
-        copy MyProject.Repository.Test/Data/appSettings.gitlab.json MyProject.Repository.Test/Data/AppSettings.json
         dotnet test --logger "junit" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='.\TestResults\'
     - name: prerelease
       if: ${{ env.rIds }} != ''
