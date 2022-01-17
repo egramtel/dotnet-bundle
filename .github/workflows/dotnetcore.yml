@@ -1,0 +1,156 @@
+name: .NET Core
+
+# use https://marketplace.visualstudio.com/items?itemName=me-dutour-mathieu.vscode-github-actions to validate yml in vscode
+env:
+  NUGET_PACKAGES_DIRECTORY: '.nupkg'
+  RESHARPER_CLI_NAME: 'JetBrains.ReSharper.CommandLineTools.Unix'
+  RESHARPER_CLI_VERSION: "2019.2.3"
+  DOCKER_DRIVER: overlay
+  CONTAINER_IMAGE: codeclimate/codeclimate
+  CONTAINER_TAG: '0.85.2'
+  rIds: ${{ secrets.rIds }}
+  dotnetVersion: 5.0.404
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.dotnetVersion}}
+    - name: Build with dotnet
+      run: |
+        export DOTNET_CLI_TELEMETRY_OPTOUT=1
+        cd DotNet.Bundle
+        dotnet build
+        dotnet pack
+        cd ..
+        dotnet build
+
+
+      # dotnet build -c Release
+      # dotnet pack -c Release
+    - name: Tests
+      run: |
+        dotnet test --logger "junit" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./TestResults/'
+    - name: Coverage Report
+      run: |
+        dotnet --version
+        dotnet tool install dotnet-reportgenerator-globaltool --tool-path tools
+        ./tools/reportgenerator "-reports:**/TestResults/coverage.opencover.xml;" "-targetdir:Reports" -reportTypes:TextSummary;
+        ./tools/reportgenerator "-reports:**/TestResults/coverage.opencover.xml;" "-targetdir:Reports" -reportTypes:Html;
+        ./tools/reportgenerator "-reports:**/TestResults/coverage.opencover.xml;" "-targetdir:Reports" -reportTypes:Badges;
+        cat ./Reports/Summary.txt
+    - uses: actions/upload-artifact@v1
+      with:
+          name: CodeCoverage
+          path: Reports
+    - name: Resharper Code Quality
+      run: |
+        # apt update && apt install -y curl zip unzip
+        curl -LO "https://download.jetbrains.com/resharper/ReSharperUltimate.$RESHARPER_CLI_VERSION/$RESHARPER_CLI_NAME.$RESHARPER_CLI_VERSION.zip"
+        unzip -q $RESHARPER_CLI_NAME.$RESHARPER_CLI_VERSION.zip -d "resharper"
+        mkdir -p CodeQuality
+        files=(*.sln)
+      # sh ./resharper/dupfinder.sh "${files[0]}" --output=CodeQuality/dupfinderReport.html --format=Html
+      # sh ./resharper/inspectcode.sh "${files[0]}" --output=CodeQuality/inspectcodeReport.html --format=Html
+    - uses: actions/upload-artifact@v1
+      with:
+          name: CodeQuality
+          path: CodeQuality
+    # - name: upload release
+    #   uses: actions/upload-artifact@v2
+    #   if: ${{ env.rIds }} != ''
+    #   with:
+    #     name: Release_unix
+    #     path: Release/post
+
+  build-win:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.dotnetVersion}}
+    - name: Build with dotnet
+      run: |
+        set DOTNET_CLI_TELEMETRY_OPTOUT=1
+        cd DotNet.Bundle
+        dotnet build
+        dotnet pack
+        cd ..
+        dotnet build
+
+
+      # dotnet build -c Release
+      # dotnet pack -c Release
+    - name: Tests
+      run: |
+        dotnet test --logger "junit" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='.\TestResults\'
+    # - name: prerelease
+    #   if: ${{ env.rIds }} != ''
+    #   run: |
+    #     echo "build, obfuscate, and release"
+    #     dotnet tool install Obfuscar.GlobalTool --tool-path tools --version 2.2.28
+    #     .\scripts\extractRelease.cmd
+    #     set rIds=$env:rIds
+    #     .\scripts\pipeline.cmd
+    #     .\scripts\finalRelease.cmd
+    # - name: upload release
+    #   uses: actions/upload-artifact@v2
+    #   if: ${{ env.rIds }} != ''
+    #   with:
+    #     name: Release_win
+    #     path: Release\post
+  
+  code_docs:
+    runs-on: windows-latest
+    name: code documentation
+    steps:
+      - uses: actions/checkout@v1
+      - name: docfx
+        run: |
+          curl -LO "https://github.com/dotnet/docfx/releases/download/v2.48/docfx.zip"
+          powershell.exe -NoP -NonI -Command "Expand-Archive '.\docfx.zip' '.\docfx\'" 
+          ./docfx/docfx.exe
+      - uses: actions/upload-artifact@v1
+        with:
+          name: CodeDocs
+          path: _site
+
+  security:
+    runs-on: ubuntu-latest
+    name: Snyk Security Scan
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.dotnetVersion}}
+      - name: Build with dotnet
+        run: |
+          export DOTNET_CLI_TELEMETRY_OPTOUT=1
+          cd DotNet.Bundle
+          dotnet build
+          dotnet pack
+          cd ..
+          dotnet build
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/dotnet@master
+        with:
+          args: --file=MyProject.sln
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}

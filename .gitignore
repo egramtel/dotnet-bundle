@@ -28,3 +28,8 @@ msbuild.wrn
 
 # Intellij Idea
 .idea/
+
+
+TestResults/
+docs/
+docfx*/

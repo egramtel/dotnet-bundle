@@ -4,10 +4,10 @@ namespace Dotnet.Bundle
 {
     public class AppBundler
     {
-        private readonly BundleAppTask _task;
+        private readonly IBundleAppTask _task;
         private readonly StructureBuilder _builder;
 
-        public AppBundler(BundleAppTask task, StructureBuilder builder)
+        public AppBundler(IBundleAppTask task, StructureBuilder builder)
         {
             _task = task;
             _builder = builder;
@@ -33,8 +33,8 @@ namespace Dotnet.Bundle
             {
                 var path = Path.Combine(target.FullName, fileInfo.Name);
                 
-                _task.Log.LogMessage($"Copying file from: {fileInfo.FullName}");
-                _task.Log.LogMessage($"Copying to destination: {path}");
+                _task.LogMessage($"Copying file from: {fileInfo.FullName}");
+                _task.LogMessage($"Copying to destination: {path}");
                 
                 fileInfo.CopyTo(path, true);
             }
@@ -54,21 +54,21 @@ namespace Dotnet.Bundle
             var iconName = _task.CFBundleIconFile;
             if (string.IsNullOrWhiteSpace(iconName))
             {
-                _task.Log.LogMessage($"No icon is specified for bundle");
+                _task.LogMessage($"No icon is specified for bundle");
                 return;
             }
             
             var sourcePath = Path.Combine(source.FullName, iconName);
-            _task.Log.LogMessage($"Icon file source for bundle is: {sourcePath}");
+            _task.LogMessage($"Icon file source for bundle is: {sourcePath}");
             
             var targetPath = Path.Combine(destination.FullName, Path.GetFileName(iconName));
-            _task.Log.LogMessage($"Icon file destination for bundle is: {targetPath}");
+            _task.LogMessage($"Icon file destination for bundle is: {targetPath}");
             
             var sourceFile = new FileInfo(sourcePath);
             
             if (sourceFile.Exists)
             {
-                _task.Log.LogMessage($"Copying icon file to destination: {targetPath}");
+                _task.LogMessage($"Copying icon file to destination: {targetPath}");
                 sourceFile.CopyTo(targetPath);
             }
         }

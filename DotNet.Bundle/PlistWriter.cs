@@ -9,13 +9,13 @@ namespace Dotnet.Bundle
 {
     public class PlistWriter
     {
-        private readonly BundleAppTask _task;
+        private readonly IBundleAppTask _task;
         private readonly StructureBuilder _builder;
 
         private static readonly string[] ArrayTypeProperties = { "CFBundleURLSchemes" };
         private const char Separator = ';';
 
-        public PlistWriter(BundleAppTask task, StructureBuilder builder)
+        public PlistWriter(IBundleAppTask task, StructureBuilder builder)
         {
             _task = task;
             _builder = builder;
@@ -31,7 +31,7 @@ namespace Dotnet.Bundle
 
             var path = Path.Combine(_builder.ContentsDirectory, "Info.plist");
             
-            _task.Log.LogMessage($"Writing property list file: {path}");
+            _task.LogMessage($"Writing property list file: {path}");
             using (var xmlWriter = XmlWriter.Create(path, settings))
             {   
                 xmlWriter.WriteStartDocument();

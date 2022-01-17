@@ -12,6 +12,11 @@ Install MSBuild task via NuGet package: `Dotnet.Bundle`
 <PackageReference Include="Dotnet.Bundle" Version="*" />
 ```
 
+### Development
+* `cd TestBundle`
+* run `dotnet msbuild -t:BundleApp -p:RuntimeIdentifier=osx-x64`
+* verify `Build/Debug/net5.0/osx-x64/publish` contents
+
 ### Using the tool
 
 ```
