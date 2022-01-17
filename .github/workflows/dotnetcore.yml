@@ -36,10 +36,12 @@ jobs:
         cd DotNet.Bundle
         dotnet build
         dotnet pack
-        dotnet build -c Release
-        dotnet pack -c Release
         cd ..
         dotnet build
+
+
+      # dotnet build -c Release
+      # dotnet pack -c Release
     - name: Tests
       run: |
         dotnet test --logger "junit" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./TestResults/'
@@ -89,10 +91,12 @@ jobs:
         cd DotNet.Bundle
         dotnet build
         dotnet pack
-        dotnet build -c Release
-        dotnet pack -c Release
         cd ..
         dotnet build
+
+
+      # dotnet build -c Release
+      # dotnet pack -c Release
     - name: Tests
       run: |
         dotnet test --logger "junit" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='.\TestResults\'
