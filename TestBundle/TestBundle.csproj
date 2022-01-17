@@ -7,7 +7,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <RuntimeIdentifiers>osx-x64</RuntimeIdentifiers>
     <RestoreSources>$(RestoreSources);..\\Dotnet.Bundle\\bin\\$(Configuration)\\</RestoreSources>
-    <DotnetBundleTestVersion>9.9.999952</DotnetBundleTestVersion>
+    <DotnetBundleTestVersion>0.9.14</DotnetBundleTestVersion>
     <CustomCommands>
       <CustomCommands>
         <Command>

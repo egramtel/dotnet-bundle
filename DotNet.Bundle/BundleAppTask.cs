@@ -3,14 +3,51 @@ using Microsoft.Build.Utilities;
 
 namespace Dotnet.Bundle
 {
-    public class BundleAppTask : Task
+    public interface IBundleAppTask
+    {
+        string OutDir { get; set; }
+
+        string PublishDir { get; set; }
+
+        string CFBundleName { get; set; }
+
+        string CFBundleDisplayName { get; set; }
+
+        string CFBundleIdentifier { get; set; }
+
+        string CFBundleVersion { get; set; }
+
+        string CFBundlePackageType { get; set; }
+
+        string CFBundleSignature { get; set; }
+
+        string CFBundleExecutable { get; set; }
+
+        string CFBundleIconFile { get; set; }
+
+        string CFBundleShortVersionString { get; set; }
+
+        string NSPrincipalClass { get; set; }
+
+        bool NSHighResolutionCapable { get; set; }
+
+        bool NSRequiresAquaSystemAppearance { get; set; }
+
+        bool? NSRequiresAquaSystemAppearanceNullable { get; set; }
+
+        ITaskItem[] CFBundleURLTypes { get; set; }
+
+        bool Execute();
+        void LogMessage(string message);
+    }
+    public class BundleAppTask : Task, IBundleAppTask
     {
         [Required]
         public string OutDir { get; set; }
-        
+
         [Required]
         public string PublishDir { get; set; }
-        
+
         [Required]
         public string CFBundleName { get; set; }
 
@@ -36,31 +73,36 @@ namespace Dotnet.Bundle
         public string CFBundleIconFile { get; set; }
 
         [Required]
-        public string CFBundleShortVersionString { get; set; } 
+        public string CFBundleShortVersionString { get; set; }
 
         [Required]
         public string NSPrincipalClass { get; set; }
-        
+
         [Required]
         public bool NSHighResolutionCapable { get; set; }
 
-        public bool NSRequiresAquaSystemAppearance {
+        public bool NSRequiresAquaSystemAppearance
+        {
             get => NSRequiresAquaSystemAppearanceNullable.Value;
             set => NSRequiresAquaSystemAppearanceNullable = value;
         }
 
-        internal bool? NSRequiresAquaSystemAppearanceNullable { get; private set; }
+        public bool? NSRequiresAquaSystemAppearanceNullable { get; set; }
 
         public ITaskItem[] CFBundleURLTypes { get; set; }
+        public void LogMessage(string message)
+        {
+            Log.LogMessage(message);
+        }
 
         public override bool Execute()
         {
             var builder = new StructureBuilder(this);
             builder.Build();
-            
+
             var bundler = new AppBundler(this, builder);
             bundler.Bundle();
-            
+
             var plistWriter = new PlistWriter(this, builder);
             plistWriter.Write();
 
