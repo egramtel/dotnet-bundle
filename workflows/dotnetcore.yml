@@ -36,7 +36,6 @@ jobs:
         dotnet publish -c Release
     - name: Tests
       run: |
-        cp MyProject.Repository.Test/Data/appSettings.gitlab.json MyProject.Repository.Test/Data/AppSettings.json
         dotnet test --logger "junit" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./TestResults/'
     - name: Coverage Report
       run: |
@@ -101,35 +100,6 @@ jobs:
       with:
         name: Release_win
         path: Release\post
-  
-  unit_test_db_mssql:
-    runs-on: ubuntu-latest
-    # Service containers to run with `runner-job`
-    services:
-      # Label used to access the service container
-      redis:
-        # Docker Hub image
-        image: mcr.microsoft.com/mssql/server:2019-latest
-        #
-        ports:
-          # Opens tcp port 6379 on the host and service container
-          - 1433:1433
-        env:
-          GIT_SUBMODULE_STRATEGY: recursive
-          ACCEPT_EULA: Y
-          SA_PASSWORD: yourStrong(!)Password
-    steps:
-    - uses: actions/checkout@v1
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: ${{ env.dotnetVersion}}
-    - name: enabledb
-      run: cp ./MyProject.Repository.Test/Data/appSettings.bitbucket.mssql.json ./MyProject.Repository.Test/Data/AppSettings.json
-    - name: Tests
-      run: |
-        cd MyProject.Repository.Test
-        dotnet test --logger "junit" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./TestResults/'
   
   code_docs:
     runs-on: windows-latest
