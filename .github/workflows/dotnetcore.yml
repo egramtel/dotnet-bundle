@@ -34,10 +34,12 @@ jobs:
       run: |
         export DOTNET_CLI_TELEMETRY_OPTOUT=1
         cd DotNet.Bundle
-        dotnet build -c Release
         dotnet build
+        dotnet pack
+        dotnet build -c Release
         dotnet pack -c Release
         cd ..
+        dotnet build
     - name: Tests
       run: |
         dotnet test --logger "junit" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./TestResults/'
@@ -60,18 +62,18 @@ jobs:
         unzip -q $RESHARPER_CLI_NAME.$RESHARPER_CLI_VERSION.zip -d "resharper"
         mkdir -p CodeQuality
         files=(*.sln)
-        sh ./resharper/dupfinder.sh "${files[0]}" --output=CodeQuality/dupfinderReport.html --format=Html
-        sh ./resharper/inspectcode.sh "${files[0]}" --output=CodeQuality/inspectcodeReport.html --format=Html
+      # sh ./resharper/dupfinder.sh "${files[0]}" --output=CodeQuality/dupfinderReport.html --format=Html
+      # sh ./resharper/inspectcode.sh "${files[0]}" --output=CodeQuality/inspectcodeReport.html --format=Html
     - uses: actions/upload-artifact@v1
       with:
           name: CodeQuality
           path: CodeQuality
-    - name: upload release
-      uses: actions/upload-artifact@v2
-      if: ${{ env.rIds }} != ''
-      with:
-        name: Release_unix
-        path: Release/post
+    # - name: upload release
+    #   uses: actions/upload-artifact@v2
+    #   if: ${{ env.rIds }} != ''
+    #   with:
+    #     name: Release_unix
+    #     path: Release/post
 
   build-win:
     runs-on: windows-latest
@@ -85,28 +87,30 @@ jobs:
       run: |
         set DOTNET_CLI_TELEMETRY_OPTOUT=1
         cd DotNet.Bundle
-        dotnet build -c Release
         dotnet build
+        dotnet pack
+        dotnet build -c Release
         dotnet pack -c Release
         cd ..
+        dotnet build
     - name: Tests
       run: |
         dotnet test --logger "junit" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='.\TestResults\'
-    - name: prerelease
-      if: ${{ env.rIds }} != ''
-      run: |
-        echo "build, obfuscate, and release"
-        dotnet tool install Obfuscar.GlobalTool --tool-path tools --version 2.2.28
-        .\scripts\extractRelease.cmd
-        set rIds=$env:rIds
-        .\scripts\pipeline.cmd
-        .\scripts\finalRelease.cmd
-    - name: upload release
-      uses: actions/upload-artifact@v2
-      if: ${{ env.rIds }} != ''
-      with:
-        name: Release_win
-        path: Release\post
+    # - name: prerelease
+    #   if: ${{ env.rIds }} != ''
+    #   run: |
+    #     echo "build, obfuscate, and release"
+    #     dotnet tool install Obfuscar.GlobalTool --tool-path tools --version 2.2.28
+    #     .\scripts\extractRelease.cmd
+    #     set rIds=$env:rIds
+    #     .\scripts\pipeline.cmd
+    #     .\scripts\finalRelease.cmd
+    # - name: upload release
+    #   uses: actions/upload-artifact@v2
+    #   if: ${{ env.rIds }} != ''
+    #   with:
+    #     name: Release_win
+    #     path: Release\post
   
   code_docs:
     runs-on: windows-latest
@@ -137,6 +141,7 @@ jobs:
           export DOTNET_CLI_TELEMETRY_OPTOUT=1
           cd DotNet.Bundle
           dotnet build
+          dotnet pack
           cd ..
           dotnet build
       - name: Run Snyk to check for vulnerabilities
