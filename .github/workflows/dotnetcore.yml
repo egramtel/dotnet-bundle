@@ -34,9 +34,9 @@ jobs:
       run: |
         export DOTNET_CLI_TELEMETRY_OPTOUT=1
         cd DotNet.Bundle
-        dotnet restore
+        dotnet build -c Release
+        dotnet pack -c Release
         cd ..
-        dotnet publish -c Release
     - name: Tests
       run: |
         dotnet test --logger "junit" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='./TestResults/'
@@ -84,9 +84,9 @@ jobs:
       run: |
         set DOTNET_CLI_TELEMETRY_OPTOUT=1
         cd DotNet.Bundle
-        dotnet restore
+        dotnet build -c Release
+        dotnet pack -c Release
         cd ..
-        dotnet publish -c Release
     - name: Tests
       run: |
         dotnet test --logger "junit" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput='.\TestResults\'
@@ -134,7 +134,7 @@ jobs:
         run: |
           export DOTNET_CLI_TELEMETRY_OPTOUT=1
           cd DotNet.Bundle
-          dotnet restore
+          dotnet build
           cd ..
           dotnet build
       - name: Run Snyk to check for vulnerabilities
