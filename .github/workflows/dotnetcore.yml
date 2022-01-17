@@ -35,6 +35,7 @@ jobs:
         export DOTNET_CLI_TELEMETRY_OPTOUT=1
         cd DotNet.Bundle
         dotnet build -c Release
+        dotnet build
         dotnet pack -c Release
         cd ..
     - name: Tests
@@ -85,6 +86,7 @@ jobs:
         set DOTNET_CLI_TELEMETRY_OPTOUT=1
         cd DotNet.Bundle
         dotnet build -c Release
+        dotnet build
         dotnet pack -c Release
         cd ..
     - name: Tests
